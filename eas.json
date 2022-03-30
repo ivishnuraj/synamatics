@@ -1,13 +1,13 @@
 {
   "build": {
     "preview": {
-      "releaseChannel": "production"
-    },
-    "prod": {
       "releaseChannel": "production",
       "android": {
         "buildType": "apk"
       }
+    },
+    "prod": {
+      "releaseChannel": "production"
     },
     "staging": {
       "releaseChannel": "staging"
