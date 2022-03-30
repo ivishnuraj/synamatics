@@ -1,0 +1,10 @@
+{
+    "build": {
+      "prod": {
+        "releaseChannel": "production"
+      },
+      "staging": {
+        "releaseChannel": "staging"
+      }
+    }
+  }
