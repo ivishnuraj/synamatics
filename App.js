@@ -1,43 +1,51 @@
-import { Text, View, Alert, StyleSheet } from 'react-native'
-import React, { Component } from 'react'
-import * as Updates from 'expo-updates';
+import React from 'react';
+import { Button, StyleSheet, View } from 'react-native';
+import LottieView from 'lottie-react-native';
 
-export class App extends Component {
-  async checkForUpdates() {
-      Alert.alert("Checking for updates")
-        try {
-      const update = await Updates.checkForUpdateAsync();
-      if (update.isAvailable) {
-        Alert.alert("New Update Available")
-        // await Updates.fetchUpdateAsync();
-        // // ... notify user of update ...
-        // Updates.reloadAsync();
-      }
-      else{
-        Alert.alert("Update Not Available")
-      }
-    } catch (e) {
-        Alert.alert(e.message)
-      }    
-  }
+export default class App extends React.Component {
   componentDidMount() {
-    this.checkForUpdates();
+    this.animation.play();
+    // Or set a specific startFrame and endFrame with:
+    // this.animation.play(30, 120);
   }
+
+  resetAnimation = () => {
+    this.animation.reset();
+    this.animation.play();
+  };
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text>App</Text>
+      <View style={styles.animationContainer}>
+        <LottieView
+          ref={animation => {
+            this.animation = animation;
+          }}
+          style={{
+            width: 400,
+            height: 100,
+            backgroundColor: '#eee',
+          }}
+          source={require('./assets/lf20_5Vz7xX.json')}
+          // OR find more Lottie files @ https://lottiefiles.com/featured
+          // Just click the one you like, place that file in the 'assets' folder to the left, and replace the above 'require' statement
+        />
+        <View style={styles.buttonContainer}>
+          <Button title="Restart Animation" onPress={this.resetAnimation} />
+        </View>
       </View>
-    )
+    );
   }
 }
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  animationContainer: {
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    flex: 1,
+  },
+  buttonContainer: {
+    paddingTop: 20,
   },
 });
-
-export default App

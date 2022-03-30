@@ -2,7 +2,7 @@
   "expo": {
     "name": "synamatics",
     "slug": "synamatics",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -12,6 +12,7 @@
     },
     "updates": {
       "enabled":true,
+      "checkAutomatically":"ON_ERROR_RECOVERY",
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
