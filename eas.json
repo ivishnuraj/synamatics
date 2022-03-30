@@ -1,7 +1,13 @@
 {
   "build": {
-    "prod": {
+    "preview": {
       "releaseChannel": "production"
+    },
+    "prod": {
+      "releaseChannel": "production",
+      "android": {
+        "buildType": "apk"
+      }
     },
     "staging": {
       "releaseChannel": "staging"
