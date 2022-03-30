@@ -1,14 +1,49 @@
 import React from 'react';
 import { Button, StyleSheet, View } from 'react-native';
 import LottieView from 'lottie-react-native';
+import * as Updates from 'expo-updates';
 
 export default class App extends React.Component {
   componentDidMount() {
     this.animation.play();
+    this.checkForUpdates();
     // Or set a specific startFrame and endFrame with:
     // this.animation.play(30, 120);
   }
-
+  async checkForUpdates() {
+    try {
+  const update = await Updates.checkForUpdateAsync();
+  if (update.isAvailable) {
+    Alert.alert('Update Available', `Version ${update.manifest.version} is available to download. Download it to expierience`, [
+      {
+        text: 'Download',
+        onPress: async () => {
+          let updates = await Updates.fetchUpdateAsync();
+          if(updates.isNew) {
+            Alert.alert("Update Downloaded","Relaunch App",[
+              {
+                text: 'Relaunch',
+                onPress: () => Updates.reloadAsync(),
+              },
+              {
+                text: 'Cancel',
+                onPress: () => {},
+                style: 'cancel',
+              },
+            ])
+          }
+        },
+      },
+      { text: 'Cancel', onPress: () => console.log('OK Pressed'),style: 'cancel', },
+    ]);
+  }
+  else{
+    
+  }
+} catch (e) {
+    Alert.alert(e.message)
+  }    
+}
   resetAnimation = () => {
     this.animation.reset();
     this.animation.play();
@@ -23,10 +58,9 @@ export default class App extends React.Component {
           }}
           style={{
             width: 400,
-            height: 100,
-            backgroundColor: '#eee',
+            height: 400,
           }}
-          source={require('./assets/lf20_5Vz7xX.json')}
+          source={require('./assets/lf20_gehghjgo.json')}
           // OR find more Lottie files @ https://lottiefiles.com/featured
           // Just click the one you like, place that file in the 'assets' folder to the left, and replace the above 'require' statement
         />
